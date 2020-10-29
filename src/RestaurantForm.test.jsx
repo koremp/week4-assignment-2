@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import RestaurantForm from './RestaurantForm';
 
@@ -11,8 +11,26 @@ test('RestaurantForm', () => {
   };
 
   const handleClick = jest.fn();
+  const handleChange = jest.fn();
 
-  const { getByText } = render(<RestaurantForm restaurant={restaurant} onClick={handleClick} />);
+  const { getByText, getByDisplayValue } = render(
+    <RestaurantForm
+      restaurant={restaurant}
+      onClick={handleClick}
+      onChange={handleChange}
+    />,
+  );
+
+  expect(getByText('등록')).not.toBeNull();
+  expect(getByDisplayValue('마법')).not.toBeNull();
+  expect(getByDisplayValue('이탈')).not.toBeNull();
+  expect(getByDisplayValue('서울')).not.toBeNull();
+
+  fireEvent.change(getByDisplayValue('마법'), {
+    target: { value: '마법요리' },
+  });
+
+  expect(handleChange).toBeCalled();
 
   expect(getByText('등록')).not.toBeNull();
 });
