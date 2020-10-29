@@ -8,13 +8,7 @@ import {
 
 import restaurants from '../fixtures/restaurants';
 
-function RestaurantsContainer() {
-  return null;
-}
-
-function RestaurantInputContainer() {
-  return null;
-}
+import RestaurantsContainer from './RestaurantsContainer';
 
 export default function App() {
   const dispatch = useDispatch();
