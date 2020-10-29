@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import RestaurantCreateContainer from './RestaurantCreateContainer';
@@ -22,6 +22,18 @@ test('RestaurantCreateContainer', () => {
   expect(getByDisplayValue('마법')).not.toBeNull();
   expect(getByDisplayValue('이탈')).not.toBeNull();
   expect(getByDisplayValue('서울')).not.toBeNull();
+
+  fireEvent.change(getByDisplayValue('마법'), {
+    target: { value: '마법요리' },
+  });
+
+  expect(dispatch).toBeCalledWith({
+    type: 'changeRestaurantField',
+    payload: {
+      name: 'name',
+      value: '마법요리',
+    },
+  });
 
   fireEvent.click(getByText('등록'));
 
