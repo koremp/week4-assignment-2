@@ -30,7 +30,10 @@ test('RestaurantForm', () => {
     target: { value: '마법요리' },
   });
 
-  expect(handleChange).toBeCalled();
+  expect(handleChange).toBeCalledWith({
+    name: 'name',
+    value: '마법요리',
+  });
 
   expect(getByText('등록')).not.toBeNull();
 });
