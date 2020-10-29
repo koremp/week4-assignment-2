@@ -1,6 +1,12 @@
 import React from 'react';
 
-export default function RestaurantsContainer({ restaurants }) {
+import { useSelector } from 'react-redux';
+
+export default function RestaurantsContainer() {
+  const { restaurants } = useSelector((state) => ({
+    restaurants: state.restaurants,
+  }));
+
   return (
     <ul>
       {restaurants.map(({ id, name }) => (
